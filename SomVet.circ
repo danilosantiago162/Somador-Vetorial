@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="3.8.0" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v3.8.0(https://github.com/logisim-evolution/).
+
+  <lib desc="#Wiring" name="0">
+    <tool name="Pin">
+      <a name="appearance" val="classic"/>
+    </tool>
+  </lib>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4"/>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#TTL" name="6"/>
+  <lib desc="#TCL" name="7"/>
+  <lib desc="#Base" name="8"/>
+  <lib desc="#BFH-Praktika" name="9"/>
+  <lib desc="#Input/Output-Extra" name="10"/>
+  <lib desc="#Soc" name="11"/>
+  <main name="main"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="8" map="Button2" name="Poke Tool"/>
+    <tool lib="8" map="Button3" name="Menu Tool"/>
+    <tool lib="8" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="8" name="Poke Tool"/>
+    <tool lib="8" name="Edit Tool"/>
+    <tool lib="8" name="Wiring Tool"/>
+    <tool lib="8" name="Text Tool"/>
+    <sep/>
+    <tool lib="0" name="Pin"/>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </tool>
+    <sep/>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+    <tool lib="1" name="XOR Gate"/>
+    <tool lib="1" name="NAND Gate"/>
+    <tool lib="1" name="NOR Gate"/>
+    <sep/>
+    <tool lib="4" name="D Flip-Flop"/>
+    <tool lib="4" name="Register"/>
+  </toolbar>
+  <circuit name="main">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="main"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(190,510)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="mode_i"/>
+    </comp>
+    <comp lib="0" loc="(200,470)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="vecSize_i"/>
+      <a name="width" val="2"/>
+    </comp>
+    <comp lib="0" loc="(220,310)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A_i"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(220,400)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B_i"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(750,380)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="S_o"/>
+      <a name="output" val="true"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="8" loc="(433,200)" name="Text">
+      <a name="text" val="vecSize_i:"/>
+    </comp>
+    <comp lib="8" loc="(475,228)" name="Text">
+      <a name="font" val="SansSerif plain 16"/>
+      <a name="text" val="00 -- 8 somas de 4 bits"/>
+    </comp>
+    <comp lib="8" loc="(475,282)" name="Text">
+      <a name="font" val="SansSerif plain 16"/>
+      <a name="text" val="11 -- 1 soma de 32 bits"/>
+    </comp>
+    <comp lib="8" loc="(476,247)" name="Text">
+      <a name="font" val="SansSerif plain 16"/>
+      <a name="text" val="01 -- 4 somas de 8 bits"/>
+    </comp>
+    <comp lib="8" loc="(479,265)" name="Text">
+      <a name="font" val="SansSerif plain 16"/>
+      <a name="text" val="10 -- 2 somas de 16 bits"/>
+    </comp>
+    <comp lib="8" loc="(639,203)" name="Text">
+      <a name="text" val="mode_i:"/>
+    </comp>
+    <comp lib="8" loc="(643,229)" name="Text">
+      <a name="font" val="SansSerif plain 16"/>
+      <a name="text" val="0 -- soma"/>
+    </comp>
+    <comp lib="8" loc="(658,248)" name="Text">
+      <a name="font" val="SansSerif plain 16"/>
+      <a name="text" val="1 -- subtração"/>
+    </comp>
+    <comp loc="(640,380)" name="SomadorVetorial">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
+    <wire from="(190,510)" to="(270,510)"/>
+    <wire from="(200,470)" to="(230,470)"/>
+    <wire from="(220,310)" to="(250,310)"/>
+    <wire from="(220,400)" to="(420,400)"/>
+    <wire from="(230,420)" to="(230,470)"/>
+    <wire from="(230,420)" to="(420,420)"/>
+    <wire from="(250,310)" to="(250,380)"/>
+    <wire from="(250,380)" to="(420,380)"/>
+    <wire from="(270,440)" to="(270,510)"/>
+    <wire from="(270,440)" to="(420,440)"/>
+    <wire from="(640,380)" to="(750,380)"/>
+  </circuit>
+
+<vhdl name="SomadorVetorial">--------------------------------------------------------------------------------&#13;
+-- Project :&#13; SomadorVetorial
+-- File    :&#13; SomVet.circ
+-- Autor   :&#13; Danilo Santiago, João Paulo Rangel, Gabriel Saldanha, Henrique Gebara
+--&#13;
+--------------------------------------------------------------------------------&#13;
+-- Description :&#13; Circuito somador e subtrator de n bits em paralelo, sendo n = {4,8,16,32}
+--&#13;
+--------------------------------------------------------------------------------&#13;
+&#13;
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY SomadorVetorial IS
+  PORT (
+  ------------------------------------------------------------------------------
+  --Inputs:
+    A_i        : IN  std_logic_vector(31 DOWNTO 0); -- Entrada A_i 
+    B_i        : IN  std_logic_vector(31 DOWNTO 0); -- Entrada B_i 
+    vecSize_i : IN  std_logic_vector(1 DOWNTO 0); -- Tamanho do vetor
+    mode_i 	: IN std_logic; -- '0' para adição e '1' para subtração
+    
+
+  ------------------------------------------------------------------------------
+  --Outputs:
+    S_o        : OUT std_logic_vector(31 DOWNTO 0)  -- Resultado da Operação
+    );
+END SomadorVetorial;
+
+--------------------------------------------------------------------------------
+--Complete your VHDL description below
+--------------------------------------------------------------------------------
+
+ARCHITECTURE TypeArchitecture OF SomadorVetorial IS
+
+signal s_C : std_logic_vector(31 downto 0); --Gerador Carry
+signal s_P : std_logic_vector(31 downto 0); --Propagador Carry
+signal Carry : std_logic_vector(31 downto 0); 
+
+signal s_Soma  : std_logic_vector(31 downto 0); 
+signal B_op : std_logic_vector(31 downto 0); -- Inverte bits de B para caso de subtração
+
+BEGIN
+
+--Complemento de 2 na subtração
+B_op &lt;= B_i when (mode_i = '0') else -- Para caso de adição
+	 not(B_i) when (mode_i = '1'); -- Para caso de subtração
+
+
+--Gera C e P, que são auxiliares para gerar o carry antecipado
+GERADORCARRY : for nn in 0 to 31 generate
+    s_C(nn)   &lt;= A_i(nn) and B_op(nn); -- '1' caso A_i(nn) = B_i(nn) = '1'
+    s_P(nn)   &lt;= A_i(nn) xor B_op(nn); -- Usa o Carry anterior quando A_i(nn) != B_i(nn)
+  end generate GERADORCARRY;
+ 
+--Variável Carry bit-by-bit após geração
+  Carry(0) &lt;= '0' when mode_i = '0' else
+  		'1';
+  
+  Carry(1) &lt;= s_C(0) or (s_P(0) and Carry(0));
+  Carry(2) &lt;= s_C(1) or (s_P(1) and Carry(1));
+  Carry(3) &lt;= s_C(2) or (s_P(2) and Carry(2));
+  
+  Carry(4) &lt;= '0' when (vecSize_i = "00" and mode_i ='0') else -- Propaga o 'mode' para o segundo "bloco" 4 bits (soma)
+  		   '1' when (vecSize_i = "00" and mode_i ='1') else -- Propaga o 'mode' para o segundo "bloco" 4 bits (subtração)
+  		   s_G(3) or (s_P(3) and Carry(3)); -- Segue com a propagação de Carry caso o número de bits seja &gt;4
+  			
+  Carry(5) &lt;= s_C(4) or (s_P(4) and Carry(4));
+  Carry(6) &lt;= s_C(5) or (s_P(5) and Carry(5));
+  Carry(7) &lt;= s_C(6) or (s_P(6) and Carry(6));
+  
+  Carry(8) &lt;= '0' when (vecSize_i = "00" and mode_i ='0') else -- Propaga o 'mode' para o terceiro "bloco" de 4 bits (soma)
+  		   '1' when (vecSize_i = "00" and mode_i ='1') else -- Propaga o 'mode' para o teceiro "bloco" de 4 bits (subtração)
+  		   '0' when (vecSize_i = "01" and mode_i ='0') else -- Propaga o 'mode' para o segundo "bloco" de 8 bits (soma)
+  		   '1' when (vecSize_i = "01" and mode_i ='1') else -- Propaga o 'mode' para o segundo "bloco" de 8 bits (subtração)
+  		   s_C(7) or (s_P(7) and Carry(7)); -- Segue com a propagação de Carry caso o número de bits seja &gt;8
+  
+  Carry(9) &lt;= s_C(8) or (s_P(8) and Carry(8)); 
+  Carry(10) &lt;= s_C(9) or (s_P(9) and Carry(9));
+  Carry(11) &lt;= s_C(10) or (s_P(10) and Carry(10));
+  
+  Carry(12) &lt;= '0' when (vecSize_i = "00" and mode_i = '0') else -- Propaga o 'mode' para o quarto "bloco" de 4 bits (soma)
+  			'1' when (vecSize_i = "00" and mode_i = '1') else -- Propaga o 'mode' para o quarto "bloco de 4 bits (subtração)
+  			s_C(11) or (s_P(11) and Carry(11)); -- Segue com a propagação de Carry caso o número de bits seja &gt;4
+  			
+  Carry(13) &lt;= s_C(12) or (s_P(12) and Carry(12)); 
+  Carry(14) &lt;= s_C(13) or (s_P(13) and Carry(13));
+  Carry(15) &lt;= s_C(14) or (s_P(14) and Carry(14));
+  
+  Carry(16) &lt;= '0' when (vecSize_i = "00" and mode_i ='0') else -- Propaga o 'mode' para o quinto "bloco" de 4 bits (soma)
+  		   '1' when (vecSize_i = "00" and mode_i ='1') else -- Propaga o 'mode' para o quinto "bloco" de 4 bits (subtração)
+  		   '0' when (vecSize_i = "01" and mode_i ='0') else -- Propaga o 'mode' para o terceiro "bloco" de 8 bits (soma)
+  		   '1' when (vecSize_i = "01" and mode_i ='1') else -- Propaga o 'mode' para o terceiro "bloco" de 8 bits (subtração)
+  		   '0' when (vecSize_i = "10" and mode_i ='0') else -- Propaga o 'mode' para o segundo (e último) "bloco" de 16 bits (soma)
+  		   '1' when (vecSize_i = "10" and mode_i ='1') else -- Propaga o 'mode' para o segundo (e último) "bloco" de 16 bits (subtração)
+  		   s_C(15) or (s_P(15) and Carry(15)); -- Segue com a propagação de Carry caso o número de bits seja 32
+  
+  Carry(17) &lt;= s_C(16) or (s_P(16) and Carry(16));
+  Carry(18) &lt;= s_C(17) or (s_P(17) and Carry(17));
+  Carry(19) &lt;= s_C(18) or (s_P(18) and Carry(18));
+  
+  Carry(20) &lt;= '0' when (vecSize_i = "00" and mode_i ='0') else -- Propaga o 'mode' para o sexto "bloco" de 4 bits (soma)
+  		   '1' when (vecSize_i = "00" and mode_i ='1') else -- Propaga o 'mode' para o sexto "bloco" de 4 bits (subtração)
+  			s_C(19) or (s_P(19) and Carry(19)); -- Segue com a propagação de Carry caso o número de bits seja !=4
+  			
+  Carry(21) &lt;= s_C(20) or (s_P(20) and Carry(20)); 
+  Carry(22) &lt;= s_C(21) or (s_P(21) and Carry(21));
+  Carry(23) &lt;= s_C(22) or (s_P(22) and Carry(22));
+  
+  Carry(24) &lt;= '0' when (vecSize_i = "00" and mode_i ='0') else -- Propaga o 'mode' para o sétimo "bloco" de 4 bits (soma)
+  		   '1' when (vecSize_i = "00" and mode_i ='1') else -- Propaga o 'mode' para o sétimo "bloco" de 4 bits (subtração)
+  		   '0' when (vecSize_i = "01" and mode_i ='0') else -- Propaga o 'mode' para o quarto (e último) "bloco" de 8 bits (soma)
+  		   '1' when (vecSize_i = "01" and mode_i ='1') else -- Propaga o 'mode' para o quarto (e último) "bloco" de 8 bits (subtração)
+  			s_C(23) or (s_P(23) and Carry(23)); -- Segue com a propagação de Carry caso o número de bits seja &gt;8
+  			
+  Carry(25) &lt;= s_C(24) or (s_P(24) and Carry(24));
+  Carry(26) &lt;= s_C(25) or (s_P(25) and Carry(25));
+  Carry(27) &lt;= s_C(26) or (s_P(26) and Carry(26)); 
+  
+  Carry(28) &lt;= '0' when (vecSize_i = "00" and mode_i ='0') else -- Propaga o 'mode' para o oitavo (e último) "bloco" de 4 bits (soma)
+  		   '1' when (vecSize_i = "00" and mode_i ='1') else -- Propaga o 'mode' para o oitavo (e último) "bloco" de 4 bits (subtração)
+  			s_C(27) or (s_P(27) and Carry(27)); -- Segue com a propagação de Carry caso o número de bits seja !=4
+  			
+  Carry(29) &lt;= s_C(28) or (s_P(28) and Carry(28));
+  Carry(30) &lt;= s_C(29) or (s_P(29) and Carry(29));
+  Carry(31) &lt;= s_C(30) or (s_P(30) and Carry(30));
+  
+-- Finalmente, realizamos as somas
+  GERADOR_SOMA : for mm in 0 to 31 generate
+    s_Soma (mm) &lt;= A_i(mm) xor B_op(mm) xor Carry(mm);
+  end generate GERADOR_SOMA;
+
+
+  S_o &lt;= s_Soma;
+
+
+END TypeArchitecture;
+</vhdl>
+</project>
